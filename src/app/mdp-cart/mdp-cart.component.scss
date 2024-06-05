@@ -1,0 +1,19 @@
+.cuerpo {
+    display: flex;
+    flex-direction: column;
+
+    border: 3px solid rgba(63,66,70,255);
+    border-radius: 10px;
+    min-height: 100px;
+    overflow: hidden;
+}
+
+.titulo{
+    text-align: center;
+    text-decoration: underline;
+}
+
+.total{
+    background-image: var(--bs-gradient);
+    padding: 10px; /* Ajusta el padding según tus necesidades */
+}

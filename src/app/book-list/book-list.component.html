@@ -1,0 +1,40 @@
+<h1>LISTA DE LIBROS</h1>
+<table class="table text-center">
+    <thead>
+        <tr>
+            <th>libro</th>
+            <th>nombre</th>
+            <th>genero</th>
+            <th>precio</th>
+            <th>stock</th>
+            <th>compra</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- track sirve como id -->
+        @for (book of books; track book.name) {
+        <tr [ngClass]="{'cleareance': book.cleareance}">
+            <td><img class="portada" src="{{ book.image }}" alt="{{ book.name }}"></td>
+            <td>{{ book.name }}</td>
+            <td>{{ book.gender }}</td>
+            <td>{{ book.price | currency}}</td>
+            @if (book.stock >0) {
+            <td>{{ book.stock }}</td>
+            <td>
+                <app-input-integer [(quantity)]="book.quantity" [max]="book.stock"
+                    (maxReached)="maxReached($event)"></app-input-integer>
+                <button class="btn btn-primary btn-sm" (click)="addToCart(book)">agregar</button>
+            </td>
+            } @else {
+            <td></td>
+            <td><span class="badge text-bg-warning">SIN STOCK</span></td>
+            }
+        </tr>
+        <!-- el empty es en caso de que el for este vacio -->
+        } @empty {
+        <tr>
+            <td colspan="4">No hay libros disponibles.</td>
+        </tr>
+        }
+    </tbody>
+</table>

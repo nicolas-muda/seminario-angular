@@ -1,0 +1,6 @@
+<div class="selector">
+    <button class="btn btn-primary btn-sm" (click)="appQuantityDown()">-</button>
+    <input class="selectorCantidad" type="number" [(ngModel)]="quantity"
+        (keyup)="changeQuantity($event)">
+    <button class="btn btn-primary btn-sm" (click)="appQuantityUp()">+</button>
+</div>

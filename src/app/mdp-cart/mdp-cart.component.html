@@ -1,0 +1,14 @@
+<div class="cuerpo">
+    <h3 class="titulo">CARRITO DE COMPRA</h3>
+    <div>
+        <ul>
+            <li *ngFor="let book of cartList$ | async">
+                {{ book.name }}: {{ book.quantity }}
+                <button class="btn btn-danger btn-sm" (click)="removeBook(book)">X</button>
+            </li>
+        </ul>
+    </div>
+    <div class="total text-center bg-dark">
+        <p class="text-light"> total: {{totalPrice | currency}}</p>
+    </div>
+</div>
