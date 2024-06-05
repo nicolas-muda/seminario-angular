@@ -3,12 +3,12 @@
     <div>
         <ul>
             <li *ngFor="let book of cartList$ | async">
-                {{ book.name }}: {{ book.quantity }}
+                {{ book.name }} cant: {{ book.quantity }}
                 <button class="btn btn-danger btn-sm" (click)="removeBook(book)">X</button>
             </li>
         </ul>
     </div>
     <div class="total text-center bg-dark">
-        <p class="text-light"> total: {{totalPrice | currency}}</p>
+        <p class="text-light"> total: {{totalPrice | currency}} <button class="btn btn-primary btn-sm">Comprar</button></p>
     </div>
 </div>
