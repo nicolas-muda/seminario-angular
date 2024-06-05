@@ -20,9 +20,8 @@ export class BookCartService {
       this._cartList.push({ ...book });
     } else {
       item.quantity += book.quantity;
-      //para emitir que hubo un cambio
-      this.cartList.next(this._cartList);
     }
+    this.cartList.next(this._cartList);
   }
 
   removeBook(book: book) {
