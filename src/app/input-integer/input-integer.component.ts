@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { book } from '../book-list/book';
 
 @Component({
   selector: 'app-input-integer',
@@ -46,7 +45,7 @@ export class InputIntegerComponent {
     //le pido el valor al imput
     const value = input.value;
 
-    // Convertir el valor a número
+    //Convertir el valor a número
     const numericValue = Number(value);
 
     //controlo que sea un numero

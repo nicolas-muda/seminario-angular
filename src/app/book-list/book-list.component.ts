@@ -29,7 +29,6 @@ export class BookListComponent {
     }
   }
 
-
   static returnQuantity(name: string, quantity: number) {
     /*
      const index = this.books.findIndex(b => b.name == name);

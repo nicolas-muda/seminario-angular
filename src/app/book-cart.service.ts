@@ -30,7 +30,7 @@ export class BookCartService {
     if (index !== -1) {
       //lo saco
       this._cartList.splice(index, 1);
-      //devuelvo la cantidad al libro original
+      //devuelvo la cantidad al libro original no funciono correctamente metodo
       BookListComponent.returnQuantity(book.name, book.quantity);
       this.cartList.next(this._cartList); //emito el cambio
     }
