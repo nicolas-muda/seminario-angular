@@ -8,32 +8,36 @@ import { BookListComponent } from './book-list/book-list.component';
   providedIn: 'root'
 })
 export class BookCartService {
-  constructor() { }
-
+  private bookListComponent: BookListComponent | null = null;
   private _cartList: book[] = [];
   cartList: BehaviorSubject<book[]> = new BehaviorSubject(this._cartList);
 
+  constructor() { }
+
+  setBookListComponent(component: BookListComponent) {
+    this.bookListComponent = component;
+  }
+
   addToCart(book: book) {
-    //busca en el carrito si el libro fue agregado
     let item: book | undefined = this._cartList.find((v1) => v1.name == book.name);
     if (!item) {
       this._cartList.push({ ...book });
     } else {
       item.quantity += book.quantity;
     }
-    this.cartList.next(this._cartList);
+    this.cartList.next(this._cartList); // para emitir que hubo un cambio
   }
 
   removeBook(book: book) {
-    //busco el indice del libro en el arreglo
     const index = this._cartList.findIndex(b => b.name === book.name);
     if (index !== -1) {
-      //lo saco
       this._cartList.splice(index, 1);
-      //devuelvo la cantidad al libro original no funciono correctamente metodo
-      BookListComponent.returnQuantity(book.name, book.quantity);
-      this.cartList.next(this._cartList); //emito el cambio
+      if (this.bookListComponent) {
+        this.bookListComponent.returnStock(book.name, book.quantity);
+      } else {
+        console.error('BookListComponent is not set in BookCartService');
+      }
+      this.cartList.next(this._cartList); // emitir el cambio
     }
   }
-  
 }

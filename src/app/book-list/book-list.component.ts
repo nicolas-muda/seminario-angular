@@ -6,22 +6,20 @@ import { BookDataService } from '../book-data.service';
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
-  styleUrl: './book-list.component.scss'
+  styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent {
 
   books: book[] = [];
 
-  constructor(private cart: BookCartService, private BookDataService: BookDataService) {
-  }
+  constructor(private cart: BookCartService, private BookDataService: BookDataService) { }
 
   ngOnInit(): void {
-    this.BookDataService.getAll()
-      .subscribe(books => this.books = books);
+    this.BookDataService.getAll().subscribe(books => this.books = books);
+    this.cart.setBookListComponent(this); // Establecer la instancia del componente en el servicio
   }
 
   addToCart(book: book): void {
-    //if para controlar que la cerveza que se agrege al carrito su cantidad(quantity)no sea 0
     if (book.quantity !== 0) {
       this.cart.addToCart(book);
       book.stock -= book.quantity;
@@ -29,14 +27,12 @@ export class BookListComponent {
     }
   }
 
-  static returnQuantity(name: string, quantity: number) {
-    /*
-     const index = this.books.findIndex(b => b.name == name);
-     if (index !== -1) {
-       console.log("encontrado");
-       this.books[index].quantity += quantity;
-     }
-     */
+  returnStock(name: string, stock: number): void {
+    console.log("entro");
+    const index = this.books.findIndex(b => b.name === name);
+    if (index !== -1) {
+      this.books[index].stock += stock;
+    }
   }
 
   maxReached(m: string): void {
